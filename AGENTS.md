@@ -10,3 +10,4 @@
 - Write failing tests first (Swift Testing). Base fixtures on the real food CSV, not invented data.
 - Branch off `main` and open a PR; don't commit to `main` directly.
 - Commit, push, and open PRs as the agent GitHub user whose token is `GITHUB_PAT_ATHENA` in `.env` (gitignored). Never print the token or write it into git config.
+- That token lacks `read:org`, so `gh pr edit` fails. Edit PRs through the REST API instead: `gh api -X PATCH repos/stantonk/bodycomp/pulls/<n> -f body=...`.
