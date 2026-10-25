@@ -16,7 +16,7 @@ requires extremely low friction, so voice logging is the primary input.
 | Audience | Personal use (the stakeholder only) | Beta group / App Store |
 | Devices | iPhone only | Apple Watch voice logging (v2) |
 | iPad | Not supported | — |
-| Minimum OS | iOS 27 | watchOS 27 for the Watch app |
+| Minimum OS | iOS 26 (also runs on iOS 27) | watchOS 27 for the Watch app |
 | Storage | On-device (SwiftData) | iCloud sync via CloudKit |
 | External food data sources | None — user builds their own database | Supplement with third-party data |
 
@@ -123,7 +123,7 @@ The app hands over gradually from the cold-start estimate to the adaptive estima
 
 | | Current release | Implication |
 |---|---|---|
-| iOS / iPadOS | 27.0.1 (27.1 on iPhone Duo only), 27.2 RC in testing | Target iOS 27 |
+| iOS / iPadOS | 27.0.1 (27.1 on iPhone Duo only), 27.2 RC in testing | Minimum iOS 26 (the stakeholder's iPhone is on 26.7.1); build with the iOS 27 SDK |
 | watchOS | 27.0.1, 27.2 in beta | watchOS 27 for v2 |
 | Xcode | 27 (Swift 6.4), released 2026-09-14 | Requires macOS Tahoe 26.6+ on Apple silicon |
 
@@ -131,16 +131,16 @@ The app hands over gradually from the cold-start estimate to the adaptive estima
 
 Needed before development can start. Step-by-step instructions are in [SETUP.md](SETUP.md).
 
-1. Upgrade the development Mac (M4 Pro, 48 GB RAM, currently on macOS 15.7.9) to **macOS Tahoe 26.6 or
-   later**. Xcode 27 does not run on macOS 15.
-2. Install **Xcode 27** and the iOS 27 simulator runtime, run
+1. The development Mac (M4 Pro, 48 GB RAM) must run **macOS Tahoe 26.6 or later**. Xcode 27 does not
+   run on macOS 15. Done: it is on macOS 27.0.1.
+2. Install **Xcode 27** and the iOS 26 and iOS 27 simulator runtimes, run
    `sudo xcode-select -s /Applications/Xcode.app`, and accept the license.
 3. Sign into Xcode with an Apple ID. A **free** Apple account is in use, which means:
    - no CloudKit (hence on-device storage only),
    - apps installed on the device expire after 7 days and must be reinstalled from Xcode.
 
    A paid Apple Developer Program membership ($99/yr) removes both limitations.
-4. An iPhone on iOS 27 with Developer Mode enabled.
+4. An iPhone on iOS 26 or later with Developer Mode enabled.
 5. An OpenAI API key with the model access listed above.
 6. The stakeholder's food CSV, committed to the repo or shared by path.
 7. `xcodegen` (Homebrew), so the Xcode project is defined in a short, readable config file
@@ -150,6 +150,8 @@ Needed before development can start. Step-by-step instructions are in [SETUP.md]
 
 - SwiftData models must stay CloudKit-compatible (optional or defaulted properties, no unique
   constraints) so iCloud sync can be enabled later without a data migration.
+- The deployment target is iOS 26. Use iOS 27-only APIs only when a feature needs them, behind
+  `if #available(iOS 27, *)` with an iOS 26 fallback.
 - Core math is test-first: Katch-McArdle, adaptive TDEE, unit conversion, and day rollover.
 
 ## Delivery plan
