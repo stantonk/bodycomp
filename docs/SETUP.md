@@ -18,9 +18,9 @@ Xcode 27 does not run on older versions. The newest macOS (27) also works.
 
 1. Install it from the **Mac App Store**, or from developer.apple.com/download if the App Store is
    slow. It's a large download.
-2. Open it once. When it asks which platforms to install, include **iOS** so the iOS 27 simulator gets
-   downloaded. Then add an iOS 26 simulator runtime under **Xcode → Settings → Components**, since
-   iOS 26 is the minimum the app supports.
+2. Open it once. When it asks which platforms to install, include **iOS** so the iOS simulator gets
+   downloaded. Then add a runtime for the app's minimum iOS (see Scope in REQUIREMENTS.md) under
+   **Xcode → Settings → Components**.
 3. Point the command-line tools at Xcode and accept the license:
 
    ```
@@ -52,7 +52,7 @@ removes both limits.
 Not needed for the simulator. Do this before working on voice logging, which is best tested on a real
 phone.
 
-1. Make sure the phone is on iOS 26 or later.
+1. Make sure the phone is on the app's minimum iOS or later.
 2. Plug it into the Mac and tap **Trust**.
 3. Open the project in Xcode once so the phone sees it. Then on the phone go to **Settings → Privacy &
    Security → Developer Mode**, turn it on, and restart.
@@ -75,6 +75,6 @@ it contains data you don't want in git history, keep it out of commits.
 
 ```
 xcodebuild -version         # Xcode 27.x
-xcrun simctl list runtimes  # lists iOS 26.x and iOS 27.x
+xcrun simctl list runtimes  # lists the minimum and current iOS
 xcodegen --version
 ```
