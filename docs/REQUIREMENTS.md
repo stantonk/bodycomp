@@ -66,8 +66,7 @@ never silently estimates. Three ways to add:
 - Users may log a meal later the same day or even the next day (backfill).
 - Entries are grouped by meal in the UI. When the user doesn't say which meal, the voice flow can ask.
 - **Day rollover:** a snack after midnight counts toward the previous day. The day starts at
-  **4:00 AM** by default, configurable. *(The 4:00 AM default is an engineering assumption, not yet
-  confirmed by the stakeholder.)*
+  **4:00 AM** by default, configurable. *(Confirmed by the stakeholder on 2026-10-25.)*
 
 ## Body data
 
@@ -166,7 +165,6 @@ v2: Apple Watch voice logging, iCloud sync.
 
 ## Open assumptions
 
-- **Day rollover at 4:00 AM** by default (configurable). Not yet confirmed.
 - **Label photos** are read on-device with Apple's Vision text recognition (free, works offline), and a
   text model then structures the facts for the user to confirm.
 
